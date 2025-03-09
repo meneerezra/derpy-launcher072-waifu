@@ -2,7 +2,6 @@ package main
 
 import (
 	"embed"
-	_ "embed"
 	"log"
 	"time"
 
@@ -14,6 +13,10 @@ import (
 // made available to the frontend.
 // See https://pkg.go.dev/embed for more information.
 
+var torrentManager *Manager
+var apiManager *APIManager
+var library *Library
+
 //go:embed all:frontend/dist
 var assets embed.FS
 
@@ -21,6 +24,20 @@ var assets embed.FS
 // and starts a goroutine that emits a time-based event every second. It subsequently runs the application and
 // logs any error that might occur.
 func main() {
+	// 🐐routine
+	go func() {
+		library = get_library()
+		torrentManager = start_client()
+		apiManager = NewAPI()
+	}()
+
+	go func() {
+		/*results := scrape_1337x("goat simulator 3")
+		for _, result := range results {
+			data := get_1337x_data(result)
+			fmt.Printf("Title: %s\nUploader: %s\nDownloads: %d\nDate: %s\n\n", data.Title, data.Uploader, data.Downloads, data.Date)
+		}*/
+	}()
 
 	// Create a new Wails application by providing the necessary options.
 	// Variables 'Name' and 'Description' are for application metadata.
