@@ -1,6 +1,7 @@
 package main
 
 import (
+	"changeme/torrent"
 	"embed"
 	"fmt"
 	"log"
@@ -29,9 +30,9 @@ func main() {
 	apiManager = NewAPI()
 
 	go func() {
-		results := scrape_1337x("goat simulator 3")
+		results := torrent.Scrape_1337x("goat simulator 3")
 		for _, result := range results {
-			data := get_1337x_data(result)
+			data := torrent.Get_1337x_data(result)
 			fmt.Printf("Title: %s\nUploader: %s\nDownloads: %d\nDate: %s\n\n", data.Title, data.Uploader, data.Downloads, data.Date)
 		}
 	}()
@@ -43,9 +44,6 @@ func main() {
 	// 'Mac' options tailor the application when running an macOS.
 	app := application.New(application.Options{
 		Name: "derp-launcher072",
-		Services: []application.Service{
-			application.NewService(&GreetService{}),
-		},
 		Assets: application.AssetOptions{
 			Handler: application.AssetFileServerFS(assets),
 		},
