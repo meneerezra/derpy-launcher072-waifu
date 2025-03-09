@@ -1,7 +1,8 @@
 package main
 
 import (
-	"changeme/torrent"
+	"derpy-launcher072/library"
+	"derpy-launcher072/torrent"
 	"embed"
 	"fmt"
 	"log"
@@ -16,7 +17,7 @@ import (
 // See https://pkg.go.dev/embed for more information.
 
 var apiManager *APIManager
-var library *Library
+var gameLibrary *library.Library
 
 //go:embed all:frontend/dist
 var assets embed.FS
@@ -26,7 +27,7 @@ var assets embed.FS
 // logs any error that might occur.
 func main() {
 	// 🐐routine
-	library = get_library()
+	gameLibrary = library.GetLibrary()
 	apiManager = NewAPI()
 
 	go func() {

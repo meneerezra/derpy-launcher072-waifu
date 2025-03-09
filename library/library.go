@@ -1,4 +1,4 @@
-package main
+package library
 
 import (
 	"encoding/json"
@@ -25,7 +25,7 @@ type Library struct {
 }
 
 // geeft library.json als Library struct vol met data
-func get_library() *Library {
+func GetLibrary() *Library {
 	file, err := os.OpenFile("./library.json", os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
 		log.Printf("Error opening/creating library.json: %v", err)
@@ -61,7 +61,7 @@ func get_library() *Library {
 	return &library
 }
 
-func (lib *Library) add_library(gameData Game) error {
+func (lib *Library) AddToLibrary(gameData Game) error {
 	// Append the new game
 	lib.Games[gameData.AppID] = gameData
 
@@ -80,7 +80,7 @@ func (lib *Library) add_library(gameData Game) error {
 	return nil
 }
 
-func (lib *Library) start_app(appID int) bool {
+func (lib *Library) StartApp(appID int) bool {
 	game := lib.Games[appID]
 
 	cmd := exec.Command(game.Executable)
@@ -90,7 +90,7 @@ func (lib *Library) start_app(appID int) bool {
 	fmt.Printf("Started game with PID: %d\n", cmd.Process.Pid)
 
 	game.Running = true
-	lib.add_library(game)
+	lib.AddToLibrary(game)
 
 	go func() {
 		seconds := 0
@@ -112,7 +112,7 @@ func (lib *Library) start_app(appID int) bool {
 
 				game.Running = false
 				game.PlayTime += seconds
-				lib.add_library(game)
+				lib.AddToLibrary(game)
 				return
 			}
 		}
