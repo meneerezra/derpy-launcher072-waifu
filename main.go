@@ -25,10 +25,8 @@ var assets embed.FS
 // logs any error that might occur.
 func main() {
 	// 🐐routine
-	go func() {
-		library = get_library()
-		apiManager = NewAPI()
-	}()
+	library = get_library()
+	apiManager = NewAPI()
 
 	go func() {
 		results := scrape_1337x("goat simulator 3")
@@ -86,7 +84,6 @@ func main() {
 			time.Sleep(time.Second)
 		}
 	}()
-
 	// Run the application. This blocks until the application has been exited.
 	err := app.Run()
 
