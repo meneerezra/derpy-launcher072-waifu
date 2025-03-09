@@ -28,8 +28,7 @@ func main() {
 	// 'Bind' is a list of Go struct instances. The frontend has access to the methods of these instances.
 	// 'Mac' options tailor the application when running an macOS.
 	app := application.New(application.Options{
-		Name:        "derp-launcher072",
-		Description: "A demo of using raw HTML & CSS",
+		Name: "derp-launcher072",
 		Services: []application.Service{
 			application.NewService(&GreetService{}),
 		},
@@ -47,7 +46,12 @@ func main() {
 	// 'BackgroundColour' is the background colour of the window.
 	// 'URL' is the URL that will be loaded into the webview.
 	app.NewWebviewWindowWithOptions(application.WebviewWindowOptions{
-		Title: "Window 1",
+		Title:     "Window 1",
+		Width:     1200,
+		Height:    900,
+		MinHeight: 700,
+		MinWidth:  1064,
+		Frameless: true,
 		Mac: application.MacWindow{
 			InvisibleTitleBarHeight: 50,
 			Backdrop:                application.MacBackdropTranslucent,
