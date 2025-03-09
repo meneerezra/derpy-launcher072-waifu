@@ -2,6 +2,7 @@ package main
 
 import (
 	"embed"
+	"fmt"
 	"log"
 	"time"
 
@@ -13,7 +14,6 @@ import (
 // made available to the frontend.
 // See https://pkg.go.dev/embed for more information.
 
-var torrentManager *Manager
 var apiManager *APIManager
 var library *Library
 
@@ -27,16 +27,15 @@ func main() {
 	// 🐐routine
 	go func() {
 		library = get_library()
-		torrentManager = start_client()
 		apiManager = NewAPI()
 	}()
 
 	go func() {
-		/*results := scrape_1337x("goat simulator 3")
+		results := scrape_1337x("goat simulator 3")
 		for _, result := range results {
 			data := get_1337x_data(result)
 			fmt.Printf("Title: %s\nUploader: %s\nDownloads: %d\nDate: %s\n\n", data.Title, data.Uploader, data.Downloads, data.Date)
-		}*/
+		}
 	}()
 
 	// Create a new Wails application by providing the necessary options.
