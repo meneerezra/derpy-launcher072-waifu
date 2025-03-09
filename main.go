@@ -1,6 +1,7 @@
 package main
 
 import (
+	"derpy-launcher072/igdb"
 	"derpy-launcher072/library"
 	"derpy-launcher072/torrent"
 	"embed"
@@ -16,7 +17,7 @@ import (
 // made available to the frontend.
 // See https://pkg.go.dev/embed for more information.
 
-var apiManager *APIManager
+var apiManager *igdb.APIManager
 var gameLibrary *library.Library
 
 //go:embed all:frontend/dist
@@ -28,7 +29,7 @@ var assets embed.FS
 func main() {
 	// 🐐routine
 	gameLibrary = library.GetLibrary()
-	apiManager = NewAPI()
+	apiManager = igdb.NewAPI()
 
 	go func() {
 		results := torrent.Scrape_1337x("goat simulator 3")
