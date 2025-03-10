@@ -3,9 +3,7 @@ package main
 import (
 	"derpy-launcher072/igdb"
 	"derpy-launcher072/library"
-	"derpy-launcher072/torrent"
 	"embed"
-	"fmt"
 	"log"
 
 	"github.com/wailsapp/wails/v3/pkg/application"
@@ -31,11 +29,11 @@ func main() {
 	apiManager = igdb.NewAPI()
 
 	go func() {
-		results := torrent.Scrape_1337x("goat simulator 3")
-		for _, result := range results {
-			data := torrent.Get_1337x_data(result)
-			fmt.Printf("Title: %s\nUploader: %s\nDownloads: %d\nDate: %s\n\n", data.Title, data.Uploader, data.Downloads, data.Date)
-		}
+		//results := torrent.Scrape_1337x("goat simulator 3")
+		//for _, result := range results {
+		//	data := torrent.Get_1337x_data(result)
+		//	fmt.Printf("Title: %s\nUploader: %s\nDownloads: %d\nDate: %s\n\n", data.Title, data.Uploader, data.Downloads, data.Date)
+		//}
 	}()
 
 	// Create a new Wails application by providing the necessary options.
